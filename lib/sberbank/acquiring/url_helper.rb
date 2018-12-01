@@ -10,8 +10,9 @@ module Sberbank::Acquiring
     # @param mode [Symbol] API mode, `:test` or `:production`
     # @param version [Symbol] API version, only `:v1` for now
     # @param service [Symbol] API service to use (rest, applepay, samsung, samsungWeb, google)
+    # @param method [String] API method name (without any postfix), like 'register' and NOT 'register.do'
     # @return [String] Generated Sberbank API URL
-    def self.sb_api_url(mode = :test, version = :v1, service = nil)
+    def self.sb_api_url(mode = :test, service = nil, version = :v1, method = nil)
       protocol = "https"
 
       api_prefixes = {
@@ -24,14 +25,15 @@ module Sberbank::Acquiring
 
       api_urls = {
           rest: {
-              v1: '%{protocol}://%{site}/payment/%{service}',
+              v1: "%{protocol}://%{site}/payment/%{service}/%{method}#{REST_V1_METHOD_POSTFIX}",
           },
       }
 
       api_urls[service][version] % {
           protocol: protocol,
           site: site,
-          service: service.to_s
+          service: service.to_s,
+          method: method.to_s
       }
     end
 

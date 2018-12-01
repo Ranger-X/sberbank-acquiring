@@ -12,6 +12,9 @@ module Sberbank::Acquiring
 
     def init_methods
       @method_items.each do |method|
+        # replace "non-method" characters with '_'
+        method.gsub!(/[\.]/, '_')
+
         self.class.send :define_method, method do |params = {}|
           result = exec_request(method, params || {})
           callback_by_result result

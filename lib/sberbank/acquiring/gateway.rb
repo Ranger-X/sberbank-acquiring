@@ -15,9 +15,11 @@ module Sberbank::Acquiring
 
     def request(method, params, service = nil, version = nil)
       ver = version || :v1
-      url = UrlHelper.sb_api_url @config[:mode], ver, service
+      url = UrlHelper.sb_api_url @config[:mode], service, ver, method
+
       header = generate_header ver
       body = generate_body method, params, ver
+
       uri = URI.parse url
       request = Net::HTTP::Post.new(uri.path, initheader = header)
       request.body = body.to_json
@@ -25,6 +27,7 @@ module Sberbank::Acquiring
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = @config[:ssl] ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
+
       response = http.request(request)
 
       if response.kind_of? Net::HTTPSuccess

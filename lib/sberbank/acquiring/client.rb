@@ -6,10 +6,6 @@ require "sberbank/acquiring/exception"
 require 'time'
 
 module Sberbank::Acquiring
-  ALLOWED_API_VERSIONS = {
-      rest: [:v1],
-  }.freeze
-
   # Sberbank API client class
   class Client
     attr_reader :cache_timestamp, :gateway, :rest
@@ -60,7 +56,7 @@ module Sberbank::Acquiring
     private
 
     def init_rest
-      @rest = ServiceREST.new(self, METHODS_REST_V1, @config[:service_version])
+      @rest = ServiceREST.new(self, REST_V1_METHODS, @config[:service_version])
     end
 
     # def init_v5
