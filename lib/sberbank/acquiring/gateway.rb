@@ -24,7 +24,7 @@ module Sberbank::Acquiring
 
       uri = URI.parse url
       request = Net::HTTP::Post.new(uri.path, initheader = header)
-      request.body = Rack::Utils.build_query(body)
+      request.body = body
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -66,7 +66,15 @@ module Sberbank::Acquiring
       end
 
       params = Util::stringify_all_keys(params)
+      #jsonParams = params.delete('jsonParams')
+
       body.merge!(params)
+      body = Rack::Utils.build_query body
+
+      # if jsonParams
+      #   # jsonParams couldn't be URL-escaped
+      #   body = "#{body}&jsonParams=#{jsonParams.to_json}"
+      # end
 
       body
     end

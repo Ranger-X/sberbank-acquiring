@@ -24,6 +24,16 @@ describe Sberbank::Acquiring::Client do
             }).
         to_return(status: 200, body: @register_body.to_json, headers: {})
 
+    stub_request(:post, "https://3dsec.sberbank.ru/payment/rest/register.do").
+        with(
+            body: "token=TOKEN&orderNumber=4959080&amount=11100&returnUrl=https%3A%2F%2Fwww.example.com%2F&jsonParams=%7B%22test%22%3D%3E%22test%22%7D",
+            headers: {
+                'Accept'=>'*/*',
+                'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                'User-Agent'=>'Ruby'
+            }).
+        to_return(status: 200, body: @register_body.to_json, headers: {})
+
     @restClientV1 = Sberbank::Acquiring::Client.new(auth: { token: TOKEN })
   end
 
@@ -31,5 +41,10 @@ describe Sberbank::Acquiring::Client do
     it "works well with REST version 1" do
       assert @restClientV1.rest.register(orderNumber: ORDER_NUM, amount: AMOUNT_RUB * 100, returnUrl: 'https://www.example.com/') == @register_body
     end
+
+    it "works well with REST version 1 AND jsonParams" do
+      assert @restClientV1.rest.register(orderNumber: ORDER_NUM, amount: AMOUNT_RUB * 100, returnUrl: 'https://www.example.com/', jsonParams: { test: 'test' }) == @register_body
+    end
+
   end
 end
