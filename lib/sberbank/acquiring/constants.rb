@@ -8,6 +8,12 @@ module Sberbank
     REST_V1_METHOD_POSTFIX = '.do'
     REST_V1_METHODS = [
         'register',
+        'reverse',
+        'refund',
+        'getOrderStatusExtended',
+        'verifyEnrollment',
+        'registerPreAuth',
+        'deposit'
     ]
   end
 end

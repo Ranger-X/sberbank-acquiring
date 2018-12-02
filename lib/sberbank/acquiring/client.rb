@@ -16,14 +16,15 @@ module Sberbank::Acquiring
     # @return [Sberbank::Acquiring::Client]
     def initialize(config = {})
       @config = {
-          token: nil,
+          auth: { token: nil, username: nil, password: nil, },
           mode: :test,
           service: :rest,
           service_version: :v1,
-          ssl: true
+          ssl: true,
+          debug: false
       }.merge(config)
 
-      raise "Token can't be empty!" if @config[:token].nil?
+      raise "You must specify config[:auth][:token] OR config[:auth][:username] and config[:auth][:password]" if @config[:auth][:token].nil? && (@config[:auth][:username].nil? || @config[:auth][:password].nil?)
 
       # check API version
       raise "Allowed Sberbank services are: #{ALLOWED_API_VERSIONS.inspect}" unless ALLOWED_API_VERSIONS.keys.include?(@config[:service])

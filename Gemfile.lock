@@ -22,6 +22,7 @@ GEM
       ast (~> 2.4.0)
     powerpack (0.1.2)
     public_suffix (3.0.3)
+    rack (2.0.6)
     rainbow (3.0.0)
     rake (10.5.0)
     rspec (3.8.0)
@@ -33,9 +34,6 @@ GEM
     rspec-expectations (3.8.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-its (1.2.0)
-      rspec-core (>= 3.0.0)
-      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
@@ -55,9 +53,6 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    yard (0.9.16)
-    yardstick (0.9.9)
-      yard (~> 0.8, >= 0.8.7.2)
 
 PLATFORMS
   ruby
@@ -67,14 +62,12 @@ DEPENDENCIES
   jruby-openssl
   minitest (~> 5.0)
   minitest-color
+  rack
   rake
   rspec
-  rspec-its
   rubocop
   sberbank-acquiring!
   webmock
-  yard
-  yardstick
 
 BUNDLED WITH
    1.17.1

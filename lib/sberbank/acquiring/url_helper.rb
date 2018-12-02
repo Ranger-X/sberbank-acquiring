@@ -13,6 +13,7 @@ module Sberbank::Acquiring
     # @param method [String] API method name (without any postfix), like 'register' and NOT 'register.do'
     # @return [String] Generated Sberbank API URL
     def self.sb_api_url(mode = :test, service = nil, version = :v1, method = nil)
+      #puts "mode: #{mode.inspect} service: #{service.inspect} version: #{version.inspect} method: #{method.inspect}"
       protocol = "https"
 
       api_prefixes = {
@@ -40,21 +41,22 @@ module Sberbank::Acquiring
     private
 
     def self.parse_data(response, ver)
-      if response["Content-Type"] == "application/json; charset=utf-8"
-        response_body = JSON.parse(response.body)
-        validate_response! response_body
-        result = { data: response_body }
+      #p "parse_data: response: #{response.inspect} content-type: #{response['Content-Type']} body: #{response.body.inspect}"
+      response_body = JSON.parse(response.body)
+      validate_response! response_body
+      result = { data: response_body }
 
-        result
-      else
-        {data: from_tsv_to_json(response.body)}
-      end
+      result
+
+      # if response["Content-Type"] =~ /application\/json;.*charset=utf-8/
+      # else
+      #   {data: from_tsv_to_json(response.body)}
+      # end
     end
 
     def self.validate_response!(response_body)
-      if response_body.has_key? 'error'
-        response_error = response_body['error']
-        raise Exception.new(response_error['error_detail'], response_error['error_string'], response_error['error_code'])
+      if response_body.has_key?('errorCode')
+        raise Exception.new(response_body['errorMessage'], response_body['errorCode'])
       end
     end
 

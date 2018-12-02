@@ -4,14 +4,15 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'jruby-openssl', platforms: :jruby
 gem 'rake'
-gem 'yard'
+#gem 'yard'
+gem 'rack'
 
 group :test do
   gem 'rspec'
   gem 'rubocop'
   gem 'webmock'
-  gem 'yardstick'
-  gem 'rspec-its'
+#  gem 'yardstick'
+#  gem 'rspec-its'
   gem 'minitest-color'
 end
 

@@ -1,9 +1,11 @@
 require "net/http"
 require "openssl"
 require "json"
+require 'rack'
 
 require "sberbank/acquiring/constants"
 require "sberbank/acquiring/url_helper"
+require 'sberbank/acquiring/util'
 
 module Sberbank::Acquiring
   class Gateway
@@ -22,11 +24,13 @@ module Sberbank::Acquiring
 
       uri = URI.parse url
       request = Net::HTTP::Post.new(uri.path, initheader = header)
-      request.body = body.to_json
+      request.body = Rack::Utils.build_query(body)
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = @config[:ssl] ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
+
+      http.set_debug_output($stdout) if @config[:debug]
 
       response = http.request(request)
 
@@ -49,9 +53,20 @@ module Sberbank::Acquiring
     end
 
     def generate_body(method, params, ver)
-      body = {
-          'TOKEN' => @config[:token],
-      }
+      if @config[:auth][:token].nil?
+        # no token, set username and password auth
+        body = {
+            'userName' => @config[:auth][:username],
+            'password' => @config[:auth][:password],
+        }
+      else
+        body = {
+            'token' => @config[:auth][:token],
+        }
+      end
+
+      params = Util::stringify_all_keys(params)
+      body.merge!(params)
 
       body
     end

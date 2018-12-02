@@ -10,7 +10,7 @@ module Sberbank::Acquiring
     end
 
     def exec_request(method, request_body = {})
-      @client.gateway.request method, request_body, 'rest', @version
+      @client.gateway.request method, request_body, :rest, @version
     end
   end
 end
