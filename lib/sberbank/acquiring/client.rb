@@ -8,7 +8,7 @@ require 'time'
 module Sberbank::Acquiring
   # Sberbank API client class
   class Client
-    attr_reader :cache_timestamp, :gateway, :rest
+    attr_reader :cache_timestamp, :gateway, :rest, :config
 
     # Initializes a new Client object
     #

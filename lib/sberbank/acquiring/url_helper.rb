@@ -18,7 +18,7 @@ module Sberbank::Acquiring
 
       api_prefixes = {
           test: "3dsec",
-          production: "api"
+          production: "securepayments"
       }
 
       api_prefix = api_prefixes[mode || :test]
