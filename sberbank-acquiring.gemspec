@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
-  s.metadata = { "allowed_push_host" => "TODO: Set to 'http://mygemserver.com'", "changelog_uri" => "TODO: Put your gem's CHANGELOG.md URL here.", "homepage_uri" => "https://github.com/Ranger-X/sberbank-acquiring", "source_code_uri" => "https://github.com/Ranger-X/sberbank-acquiring" } if s.respond_to? :metadata=
+  s.metadata = { "allowed_push_host" => "https://github.com/Ranger-X/sberbank-acquiring", "changelog_uri" => "https://raw.githubusercontent.com/Ranger-X/sberbank-acquiring/master/CHANGELOG.md", "homepage_uri" => "https://github.com/Ranger-X/sberbank-acquiring", "source_code_uri" => "https://github.com/Ranger-X/sberbank-acquiring" } if s.respond_to? :metadata=
   s.require_paths = ["lib".freeze]
   s.authors = ["RangerX".freeze]
   s.bindir = "exe".freeze
