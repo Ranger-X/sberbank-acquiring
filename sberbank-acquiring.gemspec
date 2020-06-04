@@ -1,41 +1,40 @@
+# -*- encoding: utf-8 -*-
+# stub: sberbank-acquiring 0.1.0 ruby lib
 
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "sberbank/acquiring/version"
+Gem::Specification.new do |s|
+  s.name = "sberbank-acquiring".freeze
+  s.version = "0.1.0"
 
-Gem::Specification.new do |spec|
-  spec.name          = "sberbank-acquiring"
-  spec.version       = Sberbank::Acquiring::VERSION
-  spec.authors       = ["RangerX"]
-  spec.email         = ["rangerx.1985@gmail.com"]
+  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
+  s.metadata = { "allowed_push_host" => "TODO: Set to 'http://mygemserver.com'", "changelog_uri" => "TODO: Put your gem's CHANGELOG.md URL here.", "homepage_uri" => "https://github.com/Ranger-X/sberbank-acquiring", "source_code_uri" => "https://github.com/Ranger-X/sberbank-acquiring" } if s.respond_to? :metadata=
+  s.require_paths = ["lib".freeze]
+  s.authors = ["RangerX".freeze]
+  s.bindir = "exe".freeze
+  s.date = "2019-07-19"
+  s.email = ["rangerx.1985@gmail.com".freeze]
+  s.files = [".gitignore".freeze, ".rspec".freeze, ".travis.yml".freeze, "CODE_OF_CONDUCT.md".freeze, "Gemfile".freeze, "Gemfile.lock".freeze, "LICENSE.txt".freeze, "README.md".freeze, "Rakefile".freeze, "bin/console".freeze, "bin/setup".freeze, "lib/sberbank/acquiring.rb".freeze, "lib/sberbank/acquiring/client.rb".freeze, "lib/sberbank/acquiring/constants.rb".freeze, "lib/sberbank/acquiring/exception.rb".freeze, "lib/sberbank/acquiring/gateway.rb".freeze, "lib/sberbank/acquiring/service_base.rb".freeze, "lib/sberbank/acquiring/service_rest.rb".freeze, "lib/sberbank/acquiring/url_helper.rb".freeze, "lib/sberbank/acquiring/util.rb".freeze, "lib/sberbank/acquiring/version.rb".freeze, "sberbank-acquiring.gemspec".freeze]
+  s.homepage = "https://github.com/Ranger-X/sberbank-acquiring".freeze
+  s.licenses = ["MIT".freeze]
+  s.rubygems_version = "2.6.11".freeze
+  s.summary = "Sberbank internet acquiring API gem".freeze
 
-  spec.summary       = %q{Sberbank internet acquiring API gem}
-  spec.homepage      = "https://github.com/Ranger-X/sberbank-acquiring"
-  spec.license       = "MIT"
+  s.installed_by_version = "2.6.11" if s.respond_to? :installed_by_version
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  if s.respond_to? :specification_version then
+    s.specification_version = 4
 
-    spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-    spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<bundler>.freeze, ["~> 1.17"])
+      s.add_development_dependency(%q<rake>.freeze, ["~> 10.0"])
+      s.add_development_dependency(%q<minitest>.freeze, ["~> 5.0"])
+    else
+      s.add_dependency(%q<bundler>.freeze, ["~> 1.17"])
+      s.add_dependency(%q<rake>.freeze, ["~> 10.0"])
+      s.add_dependency(%q<minitest>.freeze, ["~> 5.0"])
+    end
   else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
+    s.add_dependency(%q<bundler>.freeze, ["~> 1.17"])
+    s.add_dependency(%q<rake>.freeze, ["~> 10.0"])
+    s.add_dependency(%q<minitest>.freeze, ["~> 5.0"])
   end
-
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "bundler", "~> 1.17"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
 end
